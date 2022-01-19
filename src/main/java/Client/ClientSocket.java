@@ -16,10 +16,12 @@ public class ClientSocket {
         this.out = new PrintWriter(socket.getOutputStream(),true);
     }
 
+    //Pega o remote addres(ip e porta)
     public SocketAddress getRemoteSocketAddress(){
         return socket.getRemoteSocketAddress();
     }
 
+    //Recebe o objeto mensagem
     public String getMessage(){
         try{
             return in.readLine();
@@ -28,11 +30,13 @@ public class ClientSocket {
         }
     }
 
+    //Envia o objeto mensagem
     public boolean sendMessage(String message){
         out.println(message);
         return !out.checkError();
     }
 
+    //Fecha os sockets
     public void close(){
        try{ in.close();
         out.close();
