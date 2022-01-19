@@ -1,0 +1,67 @@
+package Server;
+import Client.ClientSocket;
+
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.security.spec.RSAOtherPrimeInfo;
+import java.util.LinkedList;
+import java.util.List;
+
+public class ServerSide {
+    //Crição das variaveis e set da porta
+    public static final int PORT = 10000;
+    private ServerSocket serverSocket;
+    private final List<ClientSocket> clients = new LinkedList<>();
+
+    //Instanciamento da classe ServerSocket
+    public void stat() throws IOException {
+        serverSocket = new ServerSocket(PORT);
+        ConnectionLooping();
+    }
+
+    //Criação do looping que mantém o servidor aberto
+    private void ConnectionLooping() throws IOException {
+        while (true){
+            ClientSocket clientSocket = new ClientSocket(serverSocket.accept());
+            clients.add(clientSocket);
+            new Thread(()->clientLoop(clientSocket)).start(); //Função lambda para aceitar mais mensagens
+        }
+    }
+
+    //Loop que espera mensagem do client
+    public void clientLoop(ClientSocket clientSocket){
+        String message;
+        try{
+            while ((message = clientSocket.getMessage()) != null){
+                if ("sair".equalsIgnoreCase(message))
+                    return;
+                System.out.println("mensagem recebida do cliente"+clientSocket.getRemoteSocketAddress()+":"+message);
+                sendMessageToHer(clientSocket,message);
+            }
+        } finally {
+            clientSocket.close();
+        }
+    }
+
+    private void sendMessageToHer(ClientSocket sender, String message){
+        for (ClientSocket clientSocket:clients){
+            if(!sender.equals(clientSocket)){
+                clientSocket.sendMessage(message);
+            }
+        }
+
+    }
+
+    //Abertura do servidor
+    public static void main(String[] args) {
+        ServerSide server = new ServerSide();
+        try {
+            server.stat();
+        } catch (IOException e) {
+            System.out.println("Não foi possível abrir ao servidor");;
+        }
+    }
+}
+
+
