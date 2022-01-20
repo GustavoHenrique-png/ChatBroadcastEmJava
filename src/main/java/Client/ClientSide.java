@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
 
+//Implement de Runnable para implementar o run que recebe a mensagem do servidor
 public class ClientSide implements Runnable {
     private ClientSocket clientSocket;
     private Scanner scanner;
@@ -17,7 +18,7 @@ public class ClientSide implements Runnable {
         scanner = new Scanner(System.in);
     }
 
-    //Conexão ao servidor
+    //Declaração do socket do client
     public void stat() throws IOException {
         clientSocket = new ClientSocket(new Socket(ServerAddres, ServerSide.PORT));
         System.out.println("Cliente conectado no servidor"+ServerAddres+":"+ServerSide.PORT);
@@ -25,8 +26,7 @@ public class ClientSide implements Runnable {
         messageLoop();
     }
 
-    //Criação do Looping que envia mensagens
-
+    //Criação do Looping que envia mensagens e mantém aberto pra enviar mais mensagens
     private void messageLoop() throws IOException {
         Message();
         String message;
@@ -39,7 +39,7 @@ public class ClientSide implements Runnable {
         clientSocket.close();
 
     }
-    //Tentativa de conexão com servidor
+    //Conectando com o servidor
     public static void main(String[] args) {
         ClientSide client = new ClientSide();
         try {
@@ -49,7 +49,7 @@ public class ClientSide implements Runnable {
         }
     }
 
-
+    //Run que recebe a mensagem do servidor de volta
     @Override
     public void run() {
         String message;

@@ -3,12 +3,8 @@ import Client.ClientSocket;
 
 import java.io.*;
 import java.net.ServerSocket;
-import java.net.Socket;
-import java.security.spec.RSAOtherPrimeInfo;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import Client.ClientSide;
 
 public class ServerSide{
     //Crição das variaveis e set da porta
@@ -16,7 +12,7 @@ public class ServerSide{
     private ServerSocket serverSocket;
     private final List<ClientSocket> clients = new LinkedList<>();
 
-    //Instanciamento da classe ServerSocket
+    //Instanciamento do Socket
     public void stat() throws IOException {
         serverSocket = new ServerSocket(PORT);
         ConnectionLooping();
@@ -31,7 +27,7 @@ public class ServerSide{
         }
     }
 
-    //Loop que espera mensagem do client
+    //Loop que espera mensagem do client  e permanece aberto pra continuar recebendo
     public void clientLoop(ClientSocket clientSocket){
         String message;
         try{

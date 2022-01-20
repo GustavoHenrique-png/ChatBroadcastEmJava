@@ -9,6 +9,7 @@ public class ClientSocket {
     private final BufferedReader in;
     private final PrintWriter out;
 
+    //Uso dos metodos que recebem e transmitem e recebem mensagem (in e out) in que recebe e out que envia
     public ClientSocket(Socket socket) throws IOException {
         this.socket = socket;
         System.out.println("Cliente"+socket.getRemoteSocketAddress()+"conectado");
