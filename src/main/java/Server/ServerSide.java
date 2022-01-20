@@ -5,10 +5,12 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.spec.RSAOtherPrimeInfo;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import Client.ClientSide;
 
-public class ServerSide {
+public class ServerSide{
     //Crição das variaveis e set da porta
     public static final int PORT = 10000;
     private ServerSocket serverSocket;
@@ -43,6 +45,7 @@ public class ServerSide {
             clientSocket.close();
         }
     }
+
 
     private void sendMessageToHer(ClientSocket sender, String message){
         for (ClientSocket clientSocket:clients){
