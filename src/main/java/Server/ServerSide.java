@@ -1,16 +1,23 @@
 package Server;
+import Client.ClientSide;
 import Client.ClientSocket;
 
 import java.io.*;
 import java.net.ServerSocket;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class ServerSide{
     //Crição das variaveis e set da porta
     public static final int PORT = 10000;
     private ServerSocket serverSocket;
     private final List<ClientSocket> clients = new LinkedList<>();
+    //private final HashMap<ClientSide, ClientSocket> clientes = new HashMap<>();
+
+    //clientes.put("01", new ServerSide(ClientSocket));
+    //clientes.put("02", new String(ClientSocket.getRemoteAddres))
 
     //Instanciamento do Socket
     public void stat() throws IOException {
