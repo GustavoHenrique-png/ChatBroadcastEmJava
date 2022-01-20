@@ -23,7 +23,7 @@ public class ServerSide{
         while (true){
             ClientSocket clientSocket = new ClientSocket(serverSocket.accept());
             clients.add(clientSocket);
-            new Thread(()->clientLoop(clientSocket)).start(); //Função lambda para aceitar mais mensagens
+            new Thread(()->clientLoop(clientSocket)).start(); //Função lambda para manter o esrver recevendo as mensagens
         }
     }
 
@@ -34,7 +34,7 @@ public class ServerSide{
             while ((message = clientSocket.getMessage()) != null){
                 if ("sair".equalsIgnoreCase(message))
                     return;
-                System.out.println("mensagem recebida do cliente"+clientSocket.getRemoteSocketAddress()+":"+message);
+                System.out.println("mensagem recebida do cliente: "+clientSocket.getRemoteSocketAddress()+": "+message);
                 sendMessageToHer(clientSocket,message);
             }
         } finally {
@@ -43,6 +43,7 @@ public class ServerSide{
     }
 
 
+    //Metodo que distribui a mensagem para todos os usuários da lista
     private void sendMessageToHer(ClientSocket sender, String message){
         for (ClientSocket clientSocket:clients){
             if(!sender.equals(clientSocket)){

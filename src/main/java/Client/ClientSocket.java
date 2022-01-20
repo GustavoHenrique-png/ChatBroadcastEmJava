@@ -14,7 +14,7 @@ public class ClientSocket {
         this.socket = socket;
         System.out.println("Cliente"+socket.getRemoteSocketAddress()+"conectado");
         this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        this.out = new PrintWriter(socket.getOutputStream(),true);
+        this.out = new PrintWriter(socket.getOutputStream(),true); //Flush para envio de mensagem de forma não bloqueante
     }
 
     //Pega o remote addres(ip e porta)

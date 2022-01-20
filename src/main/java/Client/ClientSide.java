@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class ClientSide implements Runnable {
     private ClientSocket clientSocket;
     private Scanner scanner;
-    private final String ServerAddres="192.168.80.133";
+    private final String ServerAddres="127.0.0.1";
 
     //Criação do input do cliente
     public void Message(){
