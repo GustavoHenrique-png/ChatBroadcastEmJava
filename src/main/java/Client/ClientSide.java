@@ -53,8 +53,8 @@ public class ClientSide implements Runnable {
     @Override
     public void run() {
         String message;
-       while ((message = clientSocket.getMessage())!=null){
-           System.out.println(message);
+        while ((message = clientSocket.getMessage())!=null){
+            System.out.println(message);
         }
 
     }

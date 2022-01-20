@@ -39,11 +39,11 @@ public class ClientSocket {
 
     //Fecha os sockets
     public void close(){
-       try{ in.close();
-        out.close();
-        socket.close();} catch (IOException e) {
-           System.out.println("Deu erro ai amigão");
-       }
+        try{ in.close();
+            out.close();
+            socket.close();} catch (IOException e) {
+            System.out.println("Deu erro ai amigão");
+        }
     }
 
 
